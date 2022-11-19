@@ -62,7 +62,6 @@ NgayDi DATE DEFAULT NULL,
 Price  DECIMAL(20,0) DEFAULT 0 ,
 GioKhoiHanh nchar(20)  NULL,
 GioDen nchar(20)  NULL,
-IdUser nvarchar(50),
 IdHangTau UNIQUEIDENTIFIER,
 Thue float null,
 DiemDen NVARCHAR(100) DEFAULT NULL,
@@ -116,10 +115,11 @@ ALTER TABLE HoaDon ADD FOREIGN KEY (IdSale) REFERENCES Sale(Id)
 -- NhanVien - Quan
 ALTER TABLE NhanVien ADD FOREIGN KEY(MaQuan) REFERENCES Quan(id)
 -- TrainTickets - User
-ALTER TABLE TrainTickets ADD FOREIGN KEY(IdUser) REFERENCES NguoiDung(Id)
+
 --TrainTickets - Tau
 ALTER TABLE TrainTickets ADD FOREIGN KEY(IdHangTau) REFERENCES Tau(Id)
 -- ChoNgoi - Tau
 ALTER TABLE ChoNgoi ADD FOREIGN KEY(IdTau) REFERENCES Tau(Id)
 --HoaDonChiTiet-TrainTickets
 ALTER TABLE HoaDonChiTiet ADD FOREIGN KEY(IdTrainTickets) REFERENCES TrainTickets(Id)
+ 
