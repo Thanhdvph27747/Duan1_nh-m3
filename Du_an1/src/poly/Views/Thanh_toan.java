@@ -55,6 +55,9 @@ public class Thanh_toan extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        lblsotien = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -137,6 +140,14 @@ public class Thanh_toan extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Số tiền");
+
+        lblsotien.setText("null");
+
+        jButton9.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(204, 204, 255));
+        jButton9.setText("Coppy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,9 +165,11 @@ public class Thanh_toan extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel2))
                         .addGap(82, 82, 82)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblsotien)
                             .addComponent(lbltennganhang)
                             .addComponent(lblsotk)
                             .addComponent(lbltentk)
@@ -166,15 +179,18 @@ public class Thanh_toan extends javax.swing.JFrame {
                             .addComponent(jButton1)
                             .addComponent(jButton5)
                             .addComponent(jButton6)
-                            .addComponent(jButton7)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(jButton8)))
+                            .addComponent(jButton7)
+                            .addComponent(jButton9))))
                 .addContainerGap(94, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton8)
+                        .addGap(225, 225, 225))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,14 +214,19 @@ public class Thanh_toan extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(lbltentk)
                     .addComponent(jButton6))
-                .addGap(31, 31, 31)
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblsotien)
+                    .addComponent(jButton7))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(lblndchuyenkhoan)
-                    .addComponent(jButton7))
-                .addGap(50, 50, 50)
+                    .addComponent(jButton9)
+                    .addComponent(lblndchuyenkhoan))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jButton8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
                 .addComponent(jButton2)
                 .addGap(15, 15, 15))
         );
@@ -285,8 +306,10 @@ public class Thanh_toan extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -298,6 +321,7 @@ public class Thanh_toan extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JLabel lblndchuyenkhoan;
+    private javax.swing.JLabel lblsotien;
     private javax.swing.JLabel lblsotk;
     private javax.swing.JLabel lbltennganhang;
     private javax.swing.JLabel lbltentk;
