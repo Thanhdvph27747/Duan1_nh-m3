@@ -19,6 +19,12 @@ public class NguoiDung {
     private String cmnd;
     private int gioitinh;
 
+    public NguoiDung(String id) {
+        this.id = id;
+    }
+
+    
+    
     public NguoiDung() {
     }
 

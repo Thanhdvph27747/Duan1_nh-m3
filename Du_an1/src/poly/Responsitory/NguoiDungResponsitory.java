@@ -34,8 +34,25 @@ public class NguoiDungResponsitory {
         return ndres;
     }
 
+    public NguoiDung getID(String socmnd) {
+
+        String sql = "select id from NguoiDung where SoCMND like '" + socmnd + "'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                NguoiDung nd = new NguoiDung();
+                nd.setId(rs.getString(1));
+                return nd;
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(NguoiDungResponsitory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public NguoiDung getDuLieu(String id, String pass) {
-        
+
         String sql = "select id,Ten,GioiTinh,Email,Sdt,SoCMND,Pass from NguoiDung"
                 + " where id like '" + id + "' and Pass like '" + pass + "'";
         try {
@@ -52,7 +69,7 @@ public class NguoiDungResponsitory {
                 return nd;
             }
         } catch (Exception ex) {
-            System.out.println("Lỗi: "+ex);
+            System.out.println("Lỗi: " + ex);
         }
         return null;
     }
@@ -77,5 +94,15 @@ public class NguoiDungResponsitory {
             Logger.getLogger(NguoiDungResponsitory.class.getName()).log(Level.SEVERE, null, ex);
         }
         return ndres;
+    }
+
+    public Integer UpdateNguoiDung(NguoiDung ng) {
+        String sql = "update nguoidung set  ten = ?,email =?,sdt =?  where socmnd = ?";
+        int row = JDBCHelper.executeUpdate(sql,
+                ng.getTen(),
+                ng.getEmail(), ng.getSdt(), //ng.getGioitinh(),
+                ng.getCmnd()
+        );
+        return row;
     }
 }

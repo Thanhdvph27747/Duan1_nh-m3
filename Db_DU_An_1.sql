@@ -62,7 +62,8 @@ NgayDi DATE DEFAULT NULL,
 Price  DECIMAL(20,0) DEFAULT 0 ,
 GioKhoiHanh nchar(20)  NULL,
 GioDen nchar(20)  NULL,
-IdHangTau UNIQUEIDENTIFIER,
+IdHangTau nvarchar(50) null,
+Iduser nvarchar(50) null,
 Thue float null,
 DiemDen NVARCHAR(100) DEFAULT NULL,
 DiemDi VARCHAR(30) DEFAULT NULL,
@@ -77,20 +78,14 @@ soTienGiam  DECIMAL(20,0) DEFAULT 0
 )
 
 
--- ChoNgoi
-CREATE TABLE ChoNgoi(
-Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-ViTri VARCHAR(20) DEFAULT NULL,
-TrangThai INT DEFAULT 0,
-IdTau UNIQUEIDENTIFIER
-)
-
-
 -- Tau
 CREATE TABLE Tau(
-Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+Id nvarchar(50) primary key,
 SoHieu VARCHAR(20) UNIQUE,
-TenTau NVARCHAR(30) DEFAULT NULL
+TenTau NVARCHAR(30) DEFAULT NULL,
+Toa NVARCHAR(30) DEFAULT NULL,
+vitri int null,
+TrangThai INT DEFAULT 1,
 )
 
 -- HoaDonChiTiet
@@ -115,11 +110,23 @@ ALTER TABLE HoaDon ADD FOREIGN KEY (IdSale) REFERENCES Sale(Id)
 -- NhanVien - Quan
 ALTER TABLE NhanVien ADD FOREIGN KEY(MaQuan) REFERENCES Quan(id)
 -- TrainTickets - User
-
+ALTER TABLE TrainTickets ADD FOREIGN KEY(iduser) REFERENCES nguoidung(id)
 --TrainTickets - Tau
 ALTER TABLE TrainTickets ADD FOREIGN KEY(IdHangTau) REFERENCES Tau(Id)
 -- ChoNgoi - Tau
-ALTER TABLE ChoNgoi ADD FOREIGN KEY(IdTau) REFERENCES Tau(Id)
+
 --HoaDonChiTiet-TrainTickets
 ALTER TABLE HoaDonChiTiet ADD FOREIGN KEY(IdTrainTickets) REFERENCES TrainTickets(Id)
  
+
+ select NguoiDung.ten,NguoiDung.SoCMND,traintickets.id,ngaydi,TrainTickets.DiemDi,DiemDen,GioKhoiHanh,GioDen,tau.TenTau,tau.Toa,tau.vitri
+ from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id 
+ join nguoidung on traintickets.iduser = nguoidung.id 
+
+ select * from NguoiDung
+ select id from NguoiDung where SoCMND = ? 
+ insert into NguoiDung(id) values('0')
+ insert into TrainTickets(Iduser) values()
+ select * from tau
+  insert into tau(id,TrangThai) values(1,0)
+  update tau set TrangThai=2 where tentau like 'Tàu1' and Toa like 'P' and vitri =1

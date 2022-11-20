@@ -27,4 +27,10 @@ public class NguoiDungServices {
     public ArrayList<NguoiDung> getThongTinNguoiDung(){
         return ndres.getThongTinNguoiDung();
     }
+    public Integer UpdateNguoiDung(NguoiDung ng){
+        return ndres.UpdateNguoiDung(ng);
+    }
+    public NguoiDung getID(String socmnd){
+        return ndres.getID(socmnd);
+    }
 }
