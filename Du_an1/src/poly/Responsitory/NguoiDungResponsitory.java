@@ -10,6 +10,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import poly.Model.NguoiDung;
+import poly.Utility.DBConnection;
 import poly.Utility.JDBCHelper;
 
 /**

@@ -6,14 +6,17 @@ package poly.Views;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import poly.Model.NguoiDung;
 import poly.Model.Tau;
 import poly.Model.Traintickets;
+import poly.Services.ITrainTicketService;
 import poly.Services.NguoiDungServices;
 import poly.Services.TrainticketsService;
+import poly.Services.impl.TrainTickServiceImpl;
 import poly.ViewModels.NguoiDungViewModels;
 
 /**
@@ -26,6 +29,8 @@ public class Dat_ve extends javax.swing.JFrame {
     DefaultTableModel dtm = new DefaultTableModel();
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private NguoiDungServices ndser = new NguoiDungServices();
+    private ITrainTicketService trainTicketService= new TrainTickServiceImpl();
+    
     private Login login;
 
     public Dat_ve(NguoiDung nguoiDung) {
@@ -66,6 +71,19 @@ public class Dat_ve extends javax.swing.JFrame {
 
     private void loadDatVe() {
         ArrayList<Traintickets> ve = veser.getTTVe();
+        dtm = (DefaultTableModel) tblDatVe.getModel();
+        dtm.setRowCount(0);
+        for (Traintickets n : ve) {
+            dtm.addRow(new Object[]{
+                n.getId(),
+                n.getNgaydi(),
+                n.getGiokhoihanh(), n.getGioden(), n.getDiemdi(), n.getDiemden(), n.getTau().getTentau(),
+                n.getTau().getToa(), n.getTau().getVitri(), n.getGia(), n.getThue()
+            });
+        }
+    }
+    private void loadTimKiem(String diemDi,String diemDen,Date ngayDi) {
+        ArrayList<Traintickets> ve = trainTicketService.timKiem(diemDi, diemDen, ngayDi);
         dtm = (DefaultTableModel) tblDatVe.getModel();
         dtm.setRowCount(0);
         for (Traintickets n : ve) {
@@ -137,14 +155,13 @@ public class Dat_ve extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbDiemDi = new javax.swing.JComboBox<>();
+        cbDiemDen = new javax.swing.JComboBox<>();
+        jDateNgayDi = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        tbnTimKiem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatVe = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
@@ -223,7 +240,6 @@ public class Dat_ve extends javax.swing.JFrame {
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 160, -1, -1));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Điểm đi");
@@ -233,21 +249,28 @@ public class Dat_ve extends javax.swing.JFrame {
         jLabel4.setText("Điểm đến");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 123, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Hải Dương", "Hải Phòng", "Quảng Ninh", "Móng Cái" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 80, 192, -1));
+        cbDiemDi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Hải Dương", "Hải Phòng", "Quảng Ninh", "Móng Cái" }));
+        jPanel2.add(cbDiemDi, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 80, 192, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Hải Dương", "Hải Phòng", "Quảng Ninh", "Móng Cái" }));
-        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 120, 192, -1));
+        cbDiemDen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Hải Dương", "Hải Phòng", "Quảng Ninh", "Móng Cái" }));
+        jPanel2.add(cbDiemDen, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 120, 192, -1));
+
+        jDateNgayDi.setDateFormatString("dd-MM-yyyy");
+        jPanel2.add(jDateNgayDi, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 190, -1));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Ngày");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 169, -1, -1));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 166, 192, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 204, 204));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Search.png"))); // NOI18N
-        jButton1.setText("Tìm");
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
+        tbnTimKiem.setBackground(new java.awt.Color(255, 204, 204));
+        tbnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Search.png"))); // NOI18N
+        tbnTimKiem.setText("Tìm");
+        tbnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbnTimKiemActionPerformed(evt);
+            }
+        });
+        jPanel2.add(tbnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -293,7 +316,7 @@ public class Dat_ve extends javax.swing.JFrame {
         });
         jPanel2.add(btnchonve, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 230, -1, -1));
 
-        jLabel19.setBackground(new java.awt.Color(204, 204, 255));
+        jLabel19.setBackground(new java.awt.Color(204, 204, 204));
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/Views/a6f4248600bc9e61bc7a6ca9310fe11a.jpg"))); // NOI18N
         jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 290));
 
@@ -730,6 +753,22 @@ public class Dat_ve extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void tbnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnTimKiemActionPerformed
+        // TODO add your handling code here:
+        String diemDi= cbDiemDi.getSelectedItem().toString();
+        String diemDen= cbDiemDen.getSelectedItem().toString();
+        Date ngayDi= jDateNgayDi.getDate();
+        
+        ArrayList<Traintickets> listTim= trainTicketService.timKiem(diemDi, diemDen, ngayDi);
+        if(listTim== null){
+            JOptionPane.showMessageDialog(this, "Không tìm thấy chuyến đi");
+        }else{
+            loadTimKiem(diemDi, diemDen, ngayDi);
+            //System.out.println(listTim);
+        }
+        
+    }//GEN-LAST:event_tbnTimKiemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -769,12 +808,12 @@ public class Dat_ve extends javax.swing.JFrame {
     private javax.swing.JButton btnchonve;
     private javax.swing.JButton btnsuatt;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> cbDiemDen;
+    private javax.swing.JComboBox<String> cbDiemDi;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private com.toedter.calendar.JDateChooser jDateNgayDi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -786,7 +825,6 @@ public class Dat_ve extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -828,7 +866,6 @@ public class Dat_ve extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblcmnd;
     private javax.swing.JLabel lblemail;
     private javax.swing.JLabel lblgioitinh;
@@ -841,6 +878,7 @@ public class Dat_ve extends javax.swing.JFrame {
     private javax.swing.JTable tblDatVe;
     private javax.swing.JButton tblSanVoucher;
     private javax.swing.JTable tblvecuatoi;
+    private javax.swing.JButton tbnTimKiem;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtsdt;
     private javax.swing.JTextField txtten;

@@ -4,13 +4,17 @@
  */
 package poly.Model;
 
+import java.util.Date;
+
 /**
  *
  * @author DELL
  */
 public class Traintickets {
 
-    private String id, ngaydi, giokhoihanh, gioden, diemdi, diemden;
+    private String id;
+    private Date ngaydi;
+    private String giokhoihanh, gioden, diemdi, diemden;
     private Double gia, thue;
     private Tau tau;
     private String iduser;
@@ -24,7 +28,7 @@ public class Traintickets {
         this.nguoidung = nguoidung;
     }
 
-    public Traintickets(String id, String ngaydi, String giokhoihanh, String gioden, String diemdi, String diemden, Tau tau, NguoiDung nguoidung) {
+    public Traintickets(String id, Date ngaydi, String giokhoihanh, String gioden, String diemdi, String diemden, Tau tau, NguoiDung nguoidung) {
         this.id = id;
         this.ngaydi = ngaydi;
         this.giokhoihanh = giokhoihanh;
@@ -48,7 +52,7 @@ public class Traintickets {
     public Traintickets() {
     }
 
-    public Traintickets(String id, String ngaydi, String giokhoihanh, String gioden, String diemdi, String diemden, Double gia, Double thue, Tau tau) {
+    public Traintickets(String id, Date ngaydi, String giokhoihanh, String gioden, String diemdi, String diemden, Double gia, Double thue, Tau tau) {
         this.id = id;
         this.ngaydi = ngaydi;
         this.giokhoihanh = giokhoihanh;
@@ -68,11 +72,11 @@ public class Traintickets {
         this.id = id;
     }
 
-    public String getNgaydi() {
+    public Date getNgaydi() {
         return ngaydi;
     }
 
-    public void setNgaydi(String ngaydi) {
+    public void setNgaydi(Date ngaydi) {
         this.ngaydi = ngaydi;
     }
 

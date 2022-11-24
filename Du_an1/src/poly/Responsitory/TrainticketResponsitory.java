@@ -7,10 +7,12 @@ package poly.Responsitory;
 import java.util.ArrayList;
 import poly.Model.Tau;
 import java.sql.*;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import poly.Model.NguoiDung;
 import poly.Model.Traintickets;
+import poly.Utility.DBConnection;
 import poly.Utility.JDBCHelper;
 
 /**
@@ -19,6 +21,8 @@ import poly.Utility.JDBCHelper;
  */
 public class TrainticketResponsitory {
 
+    private DBConnection connection;
+    
     public ArrayList<Traintickets> getTTVe() {
         ArrayList<Traintickets> ve = new ArrayList<>();
         String sql = "select traintickets.id,NgayDi,GioKhoiHanh,GioDen,DiemDi,DiemDen,price,tau.TenTau,tau.toa,tau.vitri,Thue\n"
@@ -32,7 +36,7 @@ public class TrainticketResponsitory {
                 taus.setToa(rs.getString(9));
                 taus.setVitri(rs.getInt(10));
                 String id = rs.getString(1);
-                String ngaydi = rs.getString(2);
+                Date ngaydi = rs.getDate(2);
                 String giokhoihanh = rs.getString(3);
                 String gioden = rs.getString(4);
                 String diemdi = rs.getString(5);
@@ -46,6 +50,35 @@ public class TrainticketResponsitory {
             System.out.println("Lỗi : " + ex);
         }
         return ve;
+    }
+    public ArrayList<Traintickets> timKiem(String diemDi,String diemDen,Date ngayDi) {
+        ArrayList<Traintickets> listTim = new ArrayList<>();
+        String sql = "select traintickets.id,NgayDi,GioKhoiHanh,GioDen,DiemDi,DiemDen,price,tau.TenTau,tau.toa,tau.vitri,Thue\n"
+                + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id where trangthai=1 and "
+                + "DiemDi like '%"+diemDi+"%' and DiemDen like '%"+diemDen+"%' or ngaydi like '"+ngayDi+"'";
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                Tau taus = new Tau();
+
+                taus.setTentau(rs.getString(8));
+                taus.setToa(rs.getString(9));
+                taus.setVitri(rs.getInt(10));
+                String id = rs.getString(1);
+                Date ngaydi = rs.getDate(2);
+                String giokhoihanh = rs.getString(3);
+                String gioden = rs.getString(4);
+                String diemdi = rs.getString(5);
+                String diemden = rs.getString(6);
+                Double price = rs.getDouble(7);
+                Double thue = rs.getDouble(11);
+                listTim.add(new Traintickets(id, ngaydi, giokhoihanh, gioden, diemdi, diemden, price, thue, taus));
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Lỗi : " + ex);
+        }
+        return listTim;
     }
 
     public ArrayList<Traintickets> getTTVeCuaToi(String socmnd) {
@@ -65,7 +98,7 @@ public class TrainticketResponsitory {
                 nd.setTen(rs.getString(1));
                 nd.setCmnd(rs.getString(2));
                 String id = rs.getString(3);
-                String ngaydi = rs.getString(4);
+                Date ngaydi = rs.getDate(4);
                 String giokhoihanh = rs.getString(7);
                 String gioden = rs.getString(8);
                 String diemdi = rs.getString(5);

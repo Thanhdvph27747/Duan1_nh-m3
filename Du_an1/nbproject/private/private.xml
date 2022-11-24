@@ -3,16 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DELL/OneDrive/Máy%20tính/Duan1_Nhom3/Du_an1/src/poly/Responsitory/TrainticketResponsitory.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Máy%20tính/Duan1_Nhom3/Du_an1/src/poly/Responsitory/DBcontext.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Máy%20tính/Duan1_Nhom3/Du_an1/src/poly/Model/Traintickets.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Máy%20tính/Duan1_Nhom3/Du_an1/src/poly/Services/NguoiDungServices.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Máy%20tính/Duan1_Nhom3/Du_an1/src/poly/Services/TrainticketsService.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Máy%20tính/Duan1_Nhom3/Du_an1/src/poly/Responsitory/NguoiDungResponsitory.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Máy%20tính/Duan1_Nhom3/Du_an1/src/poly/Model/NguoiDung.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Máy%20tính/Duan1_Nhom3/Du_an1/src/poly/Model/Tau.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Máy%20tính/Duan1_Nhom3/Du_an1/src/poly/Views/Login.java</file>
-            <file>file:/C:/Users/DELL/OneDrive/Máy%20tính/Duan1_Nhom3/Du_an1/src/poly/Views/Dat_ve.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Responsitory/DBcontext.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Views/Dat_ve.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Responsitory/QuanRepository.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Services/impl/QuanServiceImpl.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Model/NguoiDung.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/ViewModels/NguoiDungViewModels.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Responsitory/TrainticketResponsitory.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Utility/JDBCHelper.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Services/TrainticketsService.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Utility/DBConnection.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Services/ITrainTicketService.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Responsitory/NguoiDungResponsitory.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Services/impl/TrainTickServiceImpl.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/ViewCRUD/NhanVienCRUD.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/ViewCRUD/QuanCRUD.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Services/IQuanService.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/ViewCRUD/NguoiDungCRUD.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Model/Tau.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Model/Quan.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Model/Traintickets.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Model/NhanVien.java</file>
         </group>
     </open-files>
 </project-private>
