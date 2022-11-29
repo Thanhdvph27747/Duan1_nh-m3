@@ -25,7 +25,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setLocation(300, 200);
+        setLocation(300, 100);
         
     }
     
