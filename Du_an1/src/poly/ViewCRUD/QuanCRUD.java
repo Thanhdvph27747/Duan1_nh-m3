@@ -188,7 +188,7 @@ public class QuanCRUD extends javax.swing.JFrame {
         if (checkValidate()) {
             String ma = txtMa.getText();
             Quan q = quanService.getOne(ma);
-            if (q != null) {
+            if (q != null) {  
                 JOptionPane.showMessageDialog(this, "Mã đã tồn tại");
             } else {
                 Quan quan = new Quan();

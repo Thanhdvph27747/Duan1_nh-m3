@@ -19,7 +19,7 @@ public class TrainTickServiceImpl implements ITrainTicketService{
     private TrainticketResponsitory trainticketResponsitory= new TrainticketResponsitory();
 
     @Override
-    public ArrayList<Traintickets> timKiem(String diemDi, String diemDen, Date ngayDi) {
+    public ArrayList<Traintickets> timKiem(String diemDi, String diemDen, String ngayDi) {
         return trainticketResponsitory.timKiem(diemDi, diemDen, ngayDi);
     }
     

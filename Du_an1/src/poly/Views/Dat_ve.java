@@ -27,10 +27,10 @@ public class Dat_ve extends javax.swing.JFrame {
 
     private TrainticketsService veser = new TrainticketsService();
     DefaultTableModel dtm = new DefaultTableModel();
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private NguoiDungServices ndser = new NguoiDungServices();
-    private ITrainTicketService trainTicketService= new TrainTickServiceImpl();
-    
+    private ITrainTicketService trainTicketService = new TrainTickServiceImpl();
+
     private Login login;
 
     public Dat_ve(NguoiDung nguoiDung) {
@@ -76,21 +76,26 @@ public class Dat_ve extends javax.swing.JFrame {
         for (Traintickets n : ve) {
             dtm.addRow(new Object[]{
                 n.getId(),
-                n.getNgaydi(),
-                n.getGiokhoihanh(), n.getGioden(), n.getDiemdi(), n.getDiemden(), n.getTau().getTentau(),
+                // n.getNgaydi(),
+                n.getGiokhoihanh(), n.getGioden(),
+                // n.getDiemdi(), n.getDiemden(),
+                n.getTau().getTentau(),
                 n.getTau().getToa(), n.getTau().getVitri(), n.getGia(), n.getThue()
             });
         }
     }
-    private void loadTimKiem(String diemDi,String diemDen,Date ngayDi) {
+
+    private void loadTimKiem(String diemDi, String diemDen, String ngayDi) {
         ArrayList<Traintickets> ve = trainTicketService.timKiem(diemDi, diemDen, ngayDi);
         dtm = (DefaultTableModel) tblDatVe.getModel();
         dtm.setRowCount(0);
         for (Traintickets n : ve) {
             dtm.addRow(new Object[]{
                 n.getId(),
-                n.getNgaydi(),
-                n.getGiokhoihanh(), n.getGioden(), n.getDiemdi(), n.getDiemden(), n.getTau().getTentau(),
+                // n.getNgaydi(),
+                n.getGiokhoihanh(), n.getGioden(),
+                //n.getDiemdi(), n.getDiemden(),
+                n.getTau().getTentau(),
                 n.getTau().getToa(), n.getTau().getVitri(), n.getGia(), n.getThue()
             });
         }
@@ -168,6 +173,7 @@ public class Dat_ve extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         btnchonve = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblvecuatoi = new javax.swing.JTable();
@@ -241,28 +247,38 @@ public class Dat_ve extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/Views/rsz_pngtree-address-icon-image_2290344.jpg"))); // NOI18N
         jLabel1.setText("Điểm đi");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 86, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 120, 30));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/Views/rsz_pngtree-address-icon-image_2290344.jpg"))); // NOI18N
         jLabel4.setText("Điểm đến");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 123, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 120, -1));
 
-        cbDiemDi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Hải Dương", "Hải Phòng", "Quảng Ninh", "Móng Cái" }));
-        jPanel2.add(cbDiemDi, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 80, 192, -1));
+        cbDiemDi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cbDiemDi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ha Noi", "Hai Duong", "Hai Phong", "Quang Ninh", "Mong Cai" }));
+        jPanel2.add(cbDiemDi, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 192, 30));
 
+        cbDiemDen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cbDiemDen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Hải Dương", "Hải Phòng", "Quảng Ninh", "Móng Cái" }));
-        jPanel2.add(cbDiemDen, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 120, 192, -1));
+        jPanel2.add(cbDiemDen, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 192, 30));
 
         jDateNgayDi.setDateFormatString("dd-MM-yyyy");
-        jPanel2.add(jDateNgayDi, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 190, -1));
+        jPanel2.add(jDateNgayDi, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 190, 30));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/Views/rsz_ngay.jpg"))); // NOI18N
         jLabel5.setText("Ngày");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 169, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 90, -1));
 
         tbnTimKiem.setBackground(new java.awt.Color(255, 204, 204));
+        tbnTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        tbnTimKiem.setForeground(new java.awt.Color(0, 102, 153));
         tbnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Search.png"))); // NOI18N
         tbnTimKiem.setText("Tìm");
         tbnTimKiem.addActionListener(new java.awt.event.ActionListener() {
@@ -270,20 +286,19 @@ public class Dat_ve extends javax.swing.JFrame {
                 tbnTimKiemActionPerformed(evt);
             }
         });
-        jPanel2.add(tbnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
+        jPanel2.add(tbnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 110, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(153, 255, 153));
 
-        tblDatVe.setBackground(new java.awt.Color(0, 204, 204));
         tblDatVe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 153)));
-        tblDatVe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tblDatVe.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         tblDatVe.setForeground(new java.awt.Color(51, 51, 51));
         tblDatVe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã vé", "Ngày đi", "Giờ khởi hành", "Giờ đến", "Điểm đi", "Điểm đến", "Tên tàu", "Toa", "Vị trí", "Giá", "Thuế"
+                "Mã vé", "Giờ khởi hành", "Giờ đến", "Tên tàu", "Toa", "Vị trí", "Giá", "Thuế"
             }
         ));
         tblDatVe.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -296,29 +311,46 @@ public class Dat_ve extends javax.swing.JFrame {
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1170, 430));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel18.setForeground(new java.awt.Color(0, 0, 255));
         jLabel18.setText("Rất hân hạnh được phục vụ quý khách!");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, -1));
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, -1, -1));
 
-        jLabel23.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(102, 102, 255));
+        jLabel23.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 0, 255));
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/fpt.png"))); // NOI18N
         jLabel23.setText("FPT Polytechnic");
         jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 16, -1, -1));
 
-        btnchonve.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnchonve.setBackground(new java.awt.Color(255, 204, 204));
+        btnchonve.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         btnchonve.setForeground(new java.awt.Color(0, 102, 153));
+        btnchonve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Accept.png"))); // NOI18N
         btnchonve.setText("Chọn vé");
         btnchonve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnchonveActionPerformed(evt);
             }
         });
-        jPanel2.add(btnchonve, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 230, -1, -1));
+        jPanel2.add(btnchonve, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 220, -1, -1));
 
-        jLabel19.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/Views/a6f4248600bc9e61bc7a6ca9310fe11a.jpg"))); // NOI18N
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 290));
+        jLabel19.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 280));
+
+        jPanel7.setBackground(new java.awt.Color(255, 204, 102));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1170, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 280, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 280));
 
         jTabbedPane1.addTab("Main", jPanel2);
 
@@ -644,7 +676,7 @@ public class Dat_ve extends javax.swing.JFrame {
         txtten.setText(lblten.getText());
         lblsdt.setText(txtsdt.getText());
         lblemail.setText(txtemail.getText());
-        
+
     }//GEN-LAST:event_btnsuattActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -670,25 +702,25 @@ public class Dat_ve extends javax.swing.JFrame {
     private void btnchonveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchonveActionPerformed
         // TODO add your handling code here:
         int row = tblDatVe.getSelectedRow();
-        if(row<0){
+        if (row < 0) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn vé cần đặt");
             return;
         }
         int con = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn chọn vé này chứ?");
-        
+
         if (con == JOptionPane.NO_OPTION || con == JOptionPane.CANCEL_OPTION || con == JOptionPane.CLOSED_OPTION) {
             return;
         }
         Tau t = new Tau();
-        t.setVitri((int) tblDatVe.getValueAt(row, 8));
-        t.setToa(tblDatVe.getValueAt(row, 7).toString());
-        t.setTentau(tblDatVe.getValueAt(row, 6).toString());
+        t.setVitri((int) tblDatVe.getValueAt(row, 5));
+        t.setToa(tblDatVe.getValueAt(row, 4).toString());
+        t.setTentau(tblDatVe.getValueAt(row, 3).toString());
         if (con == JOptionPane.YES_OPTION) {
             if (veser.UpdateVe(t) != null) {
                 JOptionPane.showMessageDialog(this, "Quý khách vui lòng qua mục thanh toán để thanh toán!");
                 
             }
-
+            
         }
 
         String socmnd = lblcmnd.getText();
@@ -702,14 +734,14 @@ public class Dat_ve extends javax.swing.JFrame {
         } else {
             System.out.println(nd.getId());
             if (veser.InsertVe(c) != null) {
-               
+
             }
 
         }
-        Double price = (Double) tblDatVe.getValueAt(row, 9);
-        Double thue = (Double) tblDatVe.getValueAt(row, 10);
-        lblsotien.setText(String.valueOf((price+thue)*90/100));
-        lblnoidung.setText(tblDatVe.getValueAt(row, 0).toString());
+//        Double price = (Double) tblDatVe.getValueAt(row, 9);
+//        Double thue = (Double) tblDatVe.getValueAt(row, 10);
+//        lblsotien.setText(String.valueOf((price + thue) * 90 / 100));
+//        lblnoidung.setText(tblDatVe.getValueAt(row, 0).toString());
 
 
     }//GEN-LAST:event_btnchonveActionPerformed
@@ -717,31 +749,32 @@ public class Dat_ve extends javax.swing.JFrame {
     private void tblDatVeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatVeMouseClicked
         // TODO add your handling code here:
         int row = tblDatVe.getSelectedRow();
+
     }//GEN-LAST:event_tblDatVeMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int con = JOptionPane.showConfirmDialog(this, "Bạn xác nhận đã thanh toán hóa đơn rồi chứ?");
-        if(con==JOptionPane.NO_OPTION||con==JOptionPane.CANCEL_OPTION||con==JOptionPane.CLOSED_OPTION){
+        if (con == JOptionPane.NO_OPTION || con == JOptionPane.CANCEL_OPTION || con == JOptionPane.CLOSED_OPTION) {
             return;
-        }else{
+        } else {
             loadDatVe();
             loadVeCuaToi();
         }
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         int row = tblvecuatoi.getSelectedRow();
-        if(row<0){
+        if (row < 0) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa");
             return;
         }
-        int con = JOptionPane.showConfirmDialog(this,"Bạn chắc chắn muốn xóa vé này không?");
-        if(con==JOptionPane.NO_OPTION||con==JOptionPane.CANCEL_OPTION||con==JOptionPane.CLOSED_OPTION){
+        int con = JOptionPane.showConfirmDialog(this, "Bạn chắc chắn muốn xóa vé này không?");
+        if (con == JOptionPane.NO_OPTION || con == JOptionPane.CANCEL_OPTION || con == JOptionPane.CLOSED_OPTION) {
             return;
-        }else{
+        } else {
             Tau t = new Tau();
             t.setTentau(tblvecuatoi.getValueAt(row, 8).toString());
             t.setToa(tblvecuatoi.getValueAt(row, 9).toString());
@@ -750,23 +783,25 @@ public class Dat_ve extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Xóa thành công!");
         }
         loadVeCuaToi();
-        
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void tbnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnTimKiemActionPerformed
         // TODO add your handling code here:
-        String diemDi= cbDiemDi.getSelectedItem().toString();
-        String diemDen= cbDiemDen.getSelectedItem().toString();
-        Date ngayDi= jDateNgayDi.getDate();
-        
-        ArrayList<Traintickets> listTim= trainTicketService.timKiem(diemDi, diemDen, ngayDi);
-        if(listTim== null){
-            JOptionPane.showMessageDialog(this, "Không tìm thấy chuyến đi");
-        }else{
-            loadTimKiem(diemDi, diemDen, ngayDi);
-            //System.out.println(listTim);
+        String diemDi = cbDiemDi.getSelectedItem().toString();
+        String diemDen = cbDiemDen.getSelectedItem().toString();
+        Date ngayDi = jDateNgayDi.getDate();
+        if(jDateNgayDi.getDate()==null){
+            JOptionPane.showMessageDialog(this, "Hãy chọn ngày muốn đi của khách hàng");
+            return;
         }
-        
+        ArrayList<Traintickets> listTim = trainTicketService.timKiem(diemDi, diemDen, simpleDateFormat.format(ngayDi));
+        if (listTim.size() == 0) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy chuyến đi");
+        } else {
+            loadTimKiem(diemDi, diemDen, simpleDateFormat.format(ngayDi));
+        }
+
     }//GEN-LAST:event_tbnTimKiemActionPerformed
 
     /**
@@ -863,6 +898,7 @@ public class Dat_ve extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;

@@ -14,5 +14,5 @@ import poly.Model.Traintickets;
  */
 public interface ITrainTicketService {
     
-    public ArrayList<Traintickets> timKiem(String diemDi,String diemDen,Date ngayDi);
+    public ArrayList<Traintickets> timKiem(String diemDi,String diemDen,String ngayDi);
 }

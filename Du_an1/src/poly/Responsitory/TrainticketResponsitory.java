@@ -44,18 +44,18 @@ public class TrainticketResponsitory {
                 Double price = rs.getDouble(7);
                 Double thue = rs.getDouble(11);
                 ve.add(new Traintickets(id, ngaydi, giokhoihanh, gioden, diemdi, diemden, price, thue, taus));
-
+                
             }
         } catch (Exception ex) {
             System.out.println("Lỗi : " + ex);
         }
         return ve;
     }
-    public ArrayList<Traintickets> timKiem(String diemDi,String diemDen,Date ngayDi) {
+    public ArrayList<Traintickets> timKiem(String diemDi,String diemDen,String ngayDi) {
         ArrayList<Traintickets> listTim = new ArrayList<>();
         String sql = "select traintickets.id,NgayDi,GioKhoiHanh,GioDen,DiemDi,DiemDen,price,tau.TenTau,tau.toa,tau.vitri,Thue\n"
                 + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id where trangthai=1 and "
-                + "DiemDi like '%"+diemDi+"%' and DiemDen like '%"+diemDen+"%' or ngaydi like '"+ngayDi+"'";
+                + "DiemDi like '%"+diemDi+"%' and DiemDen like N'%"+diemDen+"%' and NgayDi like '"+ngayDi+"'";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
             while (rs.next()) {
