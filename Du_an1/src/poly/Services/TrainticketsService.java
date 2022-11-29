@@ -14,26 +14,43 @@ import poly.Responsitory.TrainticketResponsitory;
  * @author DELL
  */
 public class TrainticketsService {
+
     public final TrainticketResponsitory veres;
-    public TrainticketsService(){
+
+    public TrainticketsService() {
         this.veres = new TrainticketResponsitory();
     }
-    public ArrayList<Traintickets> getTTVe(){
+
+    public ArrayList<Traintickets> getTTVe() {
         return veres.getTTVe();
     }
-    public ArrayList<Traintickets> getTTVeCuaToi(String socmnd){
+
+    public ArrayList<Traintickets> getTTVeCuaToi(String socmnd) {
         return veres.getTTVeCuaToi(socmnd);
     }
-    public Integer UpdateVe(Tau t){
+
+    public Integer UpdateVe(Tau t) {
         return veres.UpdateVe(t);
     }
 
-    public Integer InsertVe(Traintickets t){
+    public Integer InsertVe(Traintickets t) {
         return veres.InsertVe(t);
     }
-     public Integer XoaLichSuVe(Tau t){
+
+    public Integer XoaLichSuVe(Tau t) {
         return veres.XoaLichSuVe(t);
     }
+    public Integer updatexacnhan(Tau t) {
+        return veres.updatexacnhan(t);
+    }
+    public Integer updatexacnhan2(Tau t) {
+        return veres.updatexacnhan2(t);
+    }
+    public Integer updatexacnhan3(Tau t) {
+        return veres.updatexacnhan3(t);
+    }
 
-    
+    public ArrayList<Traintickets> checkthanhtoan() {
+        return veres.checkthanhtoan();
+    }
 }

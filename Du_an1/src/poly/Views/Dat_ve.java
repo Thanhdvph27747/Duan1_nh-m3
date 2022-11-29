@@ -164,9 +164,9 @@ public class Dat_ve extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         cbDiemDi = new javax.swing.JComboBox<>();
         cbDiemDen = new javax.swing.JComboBox<>();
-        jDateNgayDi = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         tbnTimKiem = new javax.swing.JButton();
+        jDateNgayDi = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatVe = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
@@ -267,9 +267,6 @@ public class Dat_ve extends javax.swing.JFrame {
         cbDiemDen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Hải Dương", "Hải Phòng", "Quảng Ninh", "Móng Cái" }));
         jPanel2.add(cbDiemDen, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 192, 30));
 
-        jDateNgayDi.setDateFormatString("dd-MM-yyyy");
-        jPanel2.add(jDateNgayDi, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 190, 30));
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/Views/rsz_ngay.jpg"))); // NOI18N
@@ -287,6 +284,7 @@ public class Dat_ve extends javax.swing.JFrame {
             }
         });
         jPanel2.add(tbnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 110, -1));
+        jPanel2.add(jDateNgayDi, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 190, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -711,16 +709,16 @@ public class Dat_ve extends javax.swing.JFrame {
         if (con == JOptionPane.NO_OPTION || con == JOptionPane.CANCEL_OPTION || con == JOptionPane.CLOSED_OPTION) {
             return;
         }
-        Tau t = new Tau();
-        t.setVitri((int) tblDatVe.getValueAt(row, 5));
-        t.setToa(tblDatVe.getValueAt(row, 4).toString());
-        t.setTentau(tblDatVe.getValueAt(row, 3).toString());
+//        Tau t = new Tau();
+//        t.setVitri((int) tblDatVe.getValueAt(row, 5));
+//        t.setToa(tblDatVe.getValueAt(row, 4).toString());
+//        t.setTentau(tblDatVe.getValueAt(row, 3).toString());
         if (con == JOptionPane.YES_OPTION) {
-            if (veser.UpdateVe(t) != null) {
+//            if (veser.UpdateVe(t) != null) {
                 JOptionPane.showMessageDialog(this, "Quý khách vui lòng qua mục thanh toán để thanh toán!");
-                
-            }
-            
+//
+//            }
+
         }
 
         String socmnd = lblcmnd.getText();
@@ -738,10 +736,10 @@ public class Dat_ve extends javax.swing.JFrame {
             }
 
         }
-//        Double price = (Double) tblDatVe.getValueAt(row, 9);
-//        Double thue = (Double) tblDatVe.getValueAt(row, 10);
-//        lblsotien.setText(String.valueOf((price + thue) * 90 / 100));
-//        lblnoidung.setText(tblDatVe.getValueAt(row, 0).toString());
+        Double price = (Double) tblDatVe.getValueAt(row, 6);
+        Double thue = (Double) tblDatVe.getValueAt(row, 7);
+        lblsotien.setText(String.valueOf((price + thue) * 90 / 100));
+        lblnoidung.setText(tblDatVe.getValueAt(row, 0).toString());
 
 
     }//GEN-LAST:event_btnchonveActionPerformed
@@ -754,12 +752,17 @@ public class Dat_ve extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int row = tblDatVe.getSelectedRow();
         int con = JOptionPane.showConfirmDialog(this, "Bạn xác nhận đã thanh toán hóa đơn rồi chứ?");
         if (con == JOptionPane.NO_OPTION || con == JOptionPane.CANCEL_OPTION || con == JOptionPane.CLOSED_OPTION) {
             return;
         } else {
-            loadDatVe();
-            loadVeCuaToi();
+            JOptionPane.showMessageDialog(this, "Vui lòng chờ hệ thống check thanh toán! Cảm ơn quý khách đã sử dụng dịch vụ :3");
+            Tau t = new Tau();
+            t.setVitri((int) tblDatVe.getValueAt(row, 5));
+            t.setToa(tblDatVe.getValueAt(row, 4).toString());
+            t.setTentau(tblDatVe.getValueAt(row, 3).toString());
+            veser.updatexacnhan(t);
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -791,7 +794,7 @@ public class Dat_ve extends javax.swing.JFrame {
         String diemDi = cbDiemDi.getSelectedItem().toString();
         String diemDen = cbDiemDen.getSelectedItem().toString();
         Date ngayDi = jDateNgayDi.getDate();
-        if(jDateNgayDi.getDate()==null){
+        if (jDateNgayDi.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Hãy chọn ngày muốn đi của khách hàng");
             return;
         }

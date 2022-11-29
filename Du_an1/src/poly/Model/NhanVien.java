@@ -19,6 +19,16 @@ public class NhanVien {
     private String maQuan;
     private String pass;
 
+    public NhanVien(String id, String ma, String ho, String ten, String email, String gioiTinh, String pass) {
+        this.id = id;
+        this.ma = ma;
+        this.ho = ho;
+        this.ten = ten;
+        this.email = email;
+        this.gioiTinh = gioiTinh;
+        this.pass = pass;
+    }
+    
     public NhanVien() {
     }
 

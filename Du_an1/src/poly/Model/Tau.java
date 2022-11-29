@@ -11,7 +11,7 @@ package poly.Model;
 public class Tau {
     private String sohieu,tentau,toa;
     private int vitri;
-    
+    private int xacnhan;
     public Tau(String sohieu, String tentau, String toa, int vitri) {
         this.sohieu = sohieu;
         this.tentau = tentau;
@@ -32,6 +32,14 @@ public class Tau {
 
     public String getTentau() {
         return tentau;
+    }
+
+    public int getXacnhan() {
+        return xacnhan;
+    }
+
+    public void setXacnhan(int xacnhan) {
+        this.xacnhan = xacnhan;
     }
 
     public void setTentau(String tentau) {

@@ -16,8 +16,8 @@ import java.util.logging.Logger;
  */
 public class DBcontext {
     private static String USERNAME = "sa";
-    private static String PASSWORD ="12345678";
-    private static String URL ="jdbc:sqlserver://localhost:1433;databaseName=DB_Du_An_1_3;encrypt=true;trustservercertificate=true;";
+    private static String PASSWORD ="123";
+    private static String URL ="jdbc:sqlserver://localhost:1433;databaseName=DB_Du_An_1;encrypt=true;trustservercertificate=true;";
         static {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

@@ -3,19 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Views/Dat_ve.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/icon/Bar%20chart.png</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Views/Login.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/icon/Alarm.png</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Responsitory/TrainticketResponsitory.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/icon/Application%20form.png</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Services/TrainticketsService.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Services/impl/NhanVienServiceImpl.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Services/ITrainTicketService.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Services/impl/TrainTickServiceImpl.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/edu/NewJFrame.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Model/Tau.java</file>
-            <file>file:/C:/Users/ASUS/Desktop/DuAn1/Du_an1/src/poly/Model/Traintickets.java</file>
+            <file>file:/E:/Du_an1_Nhom3/Du_an1/src/poly/Views/Dat_ve.java</file>
+            <file>file:/E:/Du_an1_Nhom3/Du_an1/src/poly/Views/Login.java</file>
+            <file>file:/E:/Du_an1_Nhom3/Du_an1/src/poly/Utility/JDBCHelper.java</file>
+            <file>file:/E:/Du_an1_Nhom3/Du_an1/src/poly/Responsitory/DBcontext.java</file>
         </group>
     </open-files>
 </project-private>
