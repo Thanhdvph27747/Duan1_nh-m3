@@ -37,6 +37,11 @@ public class NhanVienServiceImpl implements INhanVienService{
     public boolean xoaNV(String id) {
         return nhanVienRepository.xoaNV(id);
     }
+
+    @Override
+    public NhanVien loginNhanVien(String maNV, String pass) {
+        return nhanVienRepository.loginNhanVien(maNV, pass);
+    }
     
     
 }

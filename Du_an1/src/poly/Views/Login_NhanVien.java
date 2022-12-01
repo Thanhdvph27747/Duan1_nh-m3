@@ -95,13 +95,13 @@ public class Login_NhanVien extends javax.swing.JFrame {
         }
         String id = txtuser.getText();
         String pass = txtpassword.getText();
-        NguoiDung nd = ndser.getDuLieu(id, pass);
-        if (nd == null) {
-            JOptionPane.showMessageDialog(this, "Thông tin tài khoản mật khẩu không chính xác");
-            
-        } else {
-            
-        }
+     //   NguoiDung nd = ndser.getDuLieu(id, pass);
+//        if (nd == null) {
+//            JOptionPane.showMessageDialog(this, "Thông tin tài khoản mật khẩu không chính xác");
+//            
+//        } else {
+//            
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

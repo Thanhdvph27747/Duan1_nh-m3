@@ -22,5 +22,5 @@ public interface INhanVienService {
     
     public boolean xoaNV(String id);
     
-    
+    public NhanVien loginNhanVien(String maNV,String pass);
 }
