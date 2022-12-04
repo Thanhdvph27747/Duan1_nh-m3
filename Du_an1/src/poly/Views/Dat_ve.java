@@ -231,7 +231,7 @@ public class Dat_ve extends javax.swing.JFrame {
         lblsotien = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnXacNhanThanhToan = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -260,7 +260,7 @@ public class Dat_ve extends javax.swing.JFrame {
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 120, -1));
 
         cbDiemDi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cbDiemDi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ha Noi", "Hai Duong", "Hai Phong", "Quang Ninh", "Mong Cai" }));
+        cbDiemDi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Hải Dương", "Hải Phòng", "Quảng Ninh", "Móng Cái" }));
         jPanel2.add(cbDiemDi, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 192, 30));
 
         cbDiemDen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -626,15 +626,15 @@ public class Dat_ve extends javax.swing.JFrame {
         jLabel43.setText("Đào Văn Thanh");
         jPanel6.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, -1, -1));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Euro.png"))); // NOI18N
-        jButton2.setText("Xác nhận đã thanh toán");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnXacNhanThanhToan.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        btnXacNhanThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Euro.png"))); // NOI18N
+        btnXacNhanThanhToan.setText("Xác nhận đã thanh toán");
+        btnXacNhanThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnXacNhanThanhToanActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 580, 270, -1));
+        jPanel6.add(btnXacNhanThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 580, 270, -1));
 
         jTabbedPane1.addTab("Thanh toán", jPanel6);
 
@@ -715,7 +715,7 @@ public class Dat_ve extends javax.swing.JFrame {
 //        t.setTentau(tblDatVe.getValueAt(row, 3).toString());
         if (con == JOptionPane.YES_OPTION) {
 //            if (veser.UpdateVe(t) != null) {
-                JOptionPane.showMessageDialog(this, "Quý khách vui lòng qua mục thanh toán để thanh toán!");
+            JOptionPane.showMessageDialog(this, "Quý khách vui lòng qua mục thanh toán để thanh toán!");
 //
 //            }
 
@@ -750,7 +750,7 @@ public class Dat_ve extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tblDatVeMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnXacNhanThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanThanhToanActionPerformed
         // TODO add your handling code here:
         int row = tblDatVe.getSelectedRow();
         int con = JOptionPane.showConfirmDialog(this, "Bạn xác nhận đã thanh toán hóa đơn rồi chứ?");
@@ -765,7 +765,8 @@ public class Dat_ve extends javax.swing.JFrame {
             veser.updatexacnhan(t);
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+    }//GEN-LAST:event_btnXacNhanThanhToanActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -843,12 +844,12 @@ public class Dat_ve extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnXacNhanThanhToan;
     private javax.swing.JButton btnchonve;
     private javax.swing.JButton btnsuatt;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbDiemDen;
     private javax.swing.JComboBox<String> cbDiemDi;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private com.toedter.calendar.JDateChooser jDateNgayDi;

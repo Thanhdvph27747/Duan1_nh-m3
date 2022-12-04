@@ -26,7 +26,7 @@ public class TrainticketResponsitory {
     public ArrayList<Traintickets> getTTVe() {
         ArrayList<Traintickets> ve = new ArrayList<>();
         String sql = "select traintickets.id,NgayDi,GioKhoiHanh,GioDen,DiemDi,DiemDen,price,tau.TenTau,tau.toa,tau.vitri,Thue\n"
-                + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id where trangthai=1 and xacnhan=1";
+                + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id where trangthai=1 ";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
             while (rs.next()) {
@@ -56,7 +56,7 @@ public class TrainticketResponsitory {
         ArrayList<Traintickets> listTim = new ArrayList<>();
         String sql = "select traintickets.id,NgayDi,GioKhoiHanh,GioDen,DiemDi,DiemDen,price,tau.TenTau,tau.toa,tau.vitri,Thue\n"
                 + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id where trangthai=1 and "
-                + "DiemDi like '%" + diemDi + "%' and DiemDen like N'%" + diemDen + "%' and NgayDi like '" + ngayDi + "'";
+                + "DiemDi like N'%" + diemDi + "%' and DiemDen like N'%" + diemDen + "%' and NgayDi like '" + ngayDi + "'";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
             while (rs.next()) {
@@ -179,4 +179,51 @@ public class TrainticketResponsitory {
         int row = JDBCHelper.executeUpdate(sql, t.getTentau(), t.getToa(), t.getVitri());
         return row;
     }
+    
+    
+    //Quản Lý Vé Tàu
+    //loadTenTau
+    public ArrayList<Tau> loadCbTau(){
+        ArrayList<Tau> getAll= new ArrayList<>();
+        String sql="select Id,TenTau from Tau where id not in (select IdHangTau from TrainTickets)";
+        try (Connection con= connection.getConnection();
+                PreparedStatement ps= con.prepareStatement(sql)) {
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                Traintickets traintickets= new Traintickets();
+                Tau tau= new Tau();
+                tau.setId(rs.getString(1));
+                tau.setTentau(rs.getString(2));
+                
+//                Tau tau3= new Tau();
+//                tau3.setTentau(rs.getString(3));
+//                Tau tau4= new Tau();
+//                tau4.setTentau(rs.getString(4));
+                
+//                traintickets.setTau(tau);
+//                traintickets.setTau(tau2);
+//                traintickets.setTau(tau3);
+//                traintickets.setTau(tau4);
+                getAll.add(tau);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return getAll;
+    }
+    public ArrayList<String> listCB() {
+        ArrayList<String> listQue = new ArrayList<>();
+        String sql = "select TenTau from Tau where id not in (select IdHangTau from TrainTickets)";
+        try ( Connection con = connection.getConnection();  PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String st = rs.getString(1);
+                listQue.add(st);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return listQue;
+    }
+    
 }

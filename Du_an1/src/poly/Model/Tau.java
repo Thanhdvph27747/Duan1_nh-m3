@@ -9,11 +9,11 @@ package poly.Model;
  * @author DELL
  */
 public class Tau {
-    private String sohieu,tentau,toa;
+    private String id,tentau,toa;
     private int vitri;
     private int xacnhan;
-    public Tau(String sohieu, String tentau, String toa, int vitri) {
-        this.sohieu = sohieu;
+    public Tau(String id, String tentau, String toa, int vitri) {
+        this.id = id;
         this.tentau = tentau;
         this.toa = toa;
         this.vitri = vitri;
@@ -22,12 +22,12 @@ public class Tau {
     public Tau() {
     }
 
-    public String getSohieu() {
-        return sohieu;
+    public String getId() {
+        return id;
     }
 
-    public void setSohieu(String sohieu) {
-        this.sohieu = sohieu;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTentau() {

@@ -46,6 +46,31 @@ public class NhanVienRepository {
         }
         return getList;
     }
+    public NhanVien loginNhanVien(String maNV,String pass) {      
+        String sql = "select NhanVien.id,NhanVien.ma,Ho,NhanVien.Ten,GioiTinh,Email,quan.Ten,pass \n"
+                + "from NhanVien join Quan \n"
+                + "on NhanVien.MaQuan= Quan.Id \n"
+                + "where Ma like N'%"+maNV+"%' and pass like '"+pass+"'";
+        try ( Connection con = connection.getConnection(); 
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                NhanVien nv = new NhanVien();
+                nv.setId(rs.getString(1));
+                nv.setMa(rs.getString(2));
+                nv.setHo(rs.getString(3));
+                nv.setTen(rs.getString(4));
+                nv.setGioiTinh(rs.getString(5));
+                nv.setEmail(rs.getString(6));
+                nv.setMaQuan(rs.getString(7));
+                nv.setPass(rs.getString(8));
+                return nv;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public boolean themNV(NhanVien nv) {
         String sql = "insert into NhanVien(Ma,Ho,Ten,GioiTinh,Email,MaQuan,pass) values(?,?,?,?,?,?,?)";

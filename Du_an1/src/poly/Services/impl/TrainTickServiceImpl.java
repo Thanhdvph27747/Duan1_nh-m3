@@ -6,6 +6,7 @@ package poly.Services.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import poly.Model.Tau;
 import poly.Model.Traintickets;
 import poly.Responsitory.TrainticketResponsitory;
 import poly.Services.ITrainTicketService;
@@ -21,6 +22,16 @@ public class TrainTickServiceImpl implements ITrainTicketService{
     @Override
     public ArrayList<Traintickets> timKiem(String diemDi, String diemDen, String ngayDi) {
         return trainticketResponsitory.timKiem(diemDi, diemDen, ngayDi);
+    }
+
+    @Override
+    public ArrayList<Tau> getCbTau() {
+        return trainticketResponsitory.loadCbTau();
+    }
+
+    @Override
+    public ArrayList<String> getCbTenTau() {
+        return trainticketResponsitory.listCB();
     }
     
     

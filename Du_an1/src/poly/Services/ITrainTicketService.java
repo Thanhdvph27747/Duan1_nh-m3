@@ -6,6 +6,7 @@ package poly.Services;
 
 import java.util.ArrayList;
 import java.util.Date;
+import poly.Model.Tau;
 import poly.Model.Traintickets;
 
 /**
@@ -15,4 +16,9 @@ import poly.Model.Traintickets;
 public interface ITrainTicketService {
     
     public ArrayList<Traintickets> timKiem(String diemDi,String diemDen,String ngayDi);
+    
+    //
+    public ArrayList<Tau> getCbTau();
+    
+    public ArrayList<String> getCbTenTau();
 }
