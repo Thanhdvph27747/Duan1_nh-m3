@@ -26,7 +26,7 @@ public class TrainticketResponsitory {
     public ArrayList<Traintickets> getTTVe() {
         ArrayList<Traintickets> ve = new ArrayList<>();
         String sql = "select traintickets.id,NgayDi,GioKhoiHanh,GioDen,DiemDi,DiemDen,price,tau.TenTau,tau.toa,tau.vitri,Thue\n"
-                + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id where trangthai=1 ";
+                + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id where trangthai=1 and xacnhan=1";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
             while (rs.next()) {
@@ -35,6 +35,7 @@ public class TrainticketResponsitory {
                 taus.setTentau(rs.getString(8));
                 taus.setToa(rs.getString(9));
                 taus.setVitri(rs.getInt(10));
+                
                 String id = rs.getString(1);
                 Date ngaydi = rs.getDate(2);
                 String giokhoihanh = rs.getString(3);
@@ -55,7 +56,7 @@ public class TrainticketResponsitory {
     public ArrayList<Traintickets> timKiem(String diemDi, String diemDen, String ngayDi) {
         ArrayList<Traintickets> listTim = new ArrayList<>();
         String sql = "select traintickets.id,NgayDi,GioKhoiHanh,GioDen,DiemDi,DiemDen,price,tau.TenTau,tau.toa,tau.vitri,Thue\n"
-                + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id where trangthai=1 and "
+                + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id where trangthai=1 and xacnhan=1 and "
                 + "DiemDi like N'%" + diemDi + "%' and DiemDen like N'%" + diemDen + "%' and NgayDi like '" + ngayDi + "'";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
@@ -86,7 +87,7 @@ public class TrainticketResponsitory {
         ArrayList<Traintickets> ve = new ArrayList<>();
         String sql = " select NguoiDung.ten,NguoiDung.SoCMND,traintickets.id,ngaydi,TrainTickets.DiemDi,DiemDen,GioKhoiHanh,GioDen,tau.TenTau,tau.Toa,tau.vitri\n"
                 + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id \n"
-                + " join nguoidung on traintickets.iduser = nguoidung.id where socmnd like'" + socmnd + "'" + "and trangthai=0 and xacnhan=3";
+                + " join nguoidung on traintickets.iduser = nguoidung.id where socmnd like'" + socmnd + "'" + "and trangthai=0 and xacnhan=3 ";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
             while (rs.next()) {
@@ -135,25 +136,25 @@ public class TrainticketResponsitory {
     //goi ra main nhanvien
     public ArrayList<Traintickets> checkthanhtoan() {
         ArrayList<Traintickets> ve = new ArrayList<>();
-        String sql = " select TrainTickets.Id, NguoiDung.ten,GioKhoiHanh,GioDen,tau.TenTau,tau.Toa,tau.vitri,Price\n"
+        String sql = " select TrainTickets.Id, NguoiDung.ten,NguoiDung.Email,GioKhoiHanh,GioDen,tau.TenTau,tau.Toa,tau.vitri,Price\n"
                 + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id \n"
                 + " join nguoidung on traintickets.iduser = nguoidung.id where tau.xacnhan=2";
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
             while (rs.next()) {
                 Tau taus = new Tau();
-                taus.setTentau(rs.getString(5));
-                taus.setToa(rs.getString(6));
-                taus.setVitri(rs.getInt(7));
+                taus.setTentau(rs.getString(6));
+                taus.setToa(rs.getString(7));
+                taus.setVitri(rs.getInt(8));
                 
                 NguoiDung ng = new NguoiDung();
                 ng.setTen(rs.getString(2));
-                
+                ng.setEmail(rs.getString(3));
                 String id = rs.getString(1);                
-                String giokhoihanh = rs.getString(3);
-                String gioden = rs.getString(4);
+                String giokhoihanh = rs.getString(4);
+                String gioden = rs.getString(5);
                 
-                Double price = rs.getDouble(8);
+                Double price = rs.getDouble(9);
                 
                 ve.add(new Traintickets(id, giokhoihanh, gioden, price, taus, ng));
                 
@@ -195,15 +196,6 @@ public class TrainticketResponsitory {
                 tau.setId(rs.getString(1));
                 tau.setTentau(rs.getString(2));
                 
-//                Tau tau3= new Tau();
-//                tau3.setTentau(rs.getString(3));
-//                Tau tau4= new Tau();
-//                tau4.setTentau(rs.getString(4));
-                
-//                traintickets.setTau(tau);
-//                traintickets.setTau(tau2);
-//                traintickets.setTau(tau3);
-//                traintickets.setTau(tau4);
                 getAll.add(tau);
             }
         } catch (Exception e) {

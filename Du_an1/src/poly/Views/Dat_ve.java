@@ -118,7 +118,7 @@ public class Dat_ve extends javax.swing.JFrame {
                 n.getGioden(),
                 n.getTau().getTentau(),
                 n.getTau().getToa(),
-                n.getTau().getVitri()
+                n.getTau().getVitri(),
             });
         }
     }
@@ -177,6 +177,7 @@ public class Dat_ve extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblvecuatoi = new javax.swing.JTable();
+        btnLamMoi = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -367,18 +368,34 @@ public class Dat_ve extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(tblvecuatoi);
+        if (tblvecuatoi.getColumnModel().getColumnCount() > 0) {
+            tblvecuatoi.getColumnModel().getColumn(10).setResizable(false);
+        }
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 73, 1090, -1));
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLamMoi.setBackground(new java.awt.Color(153, 255, 153));
+        btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Refresh.png"))); // NOI18N
+        btnLamMoi.setText("Làm mới");
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 538, 130, 40));
+
+        jButton6.setBackground(new java.awt.Color(153, 255, 153));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton6.setForeground(new java.awt.Color(51, 0, 51));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Delete.png"))); // NOI18N
         jButton6.setText("Xóa");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 543, 130, -1));
+        jPanel3.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 538, 130, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 255));
@@ -421,27 +438,27 @@ public class Dat_ve extends javax.swing.JFrame {
         jLabel6.setText("Thông tin cá nhân");
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(376, 6, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tên");
         jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 54, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Giới tính");
         jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 98, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Email");
         jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 148, -1, -1));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("SĐT");
         jPanel5.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 194, -1, -1));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Số CMND");
         jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 250, -1, -1));
@@ -471,27 +488,27 @@ public class Dat_ve extends javax.swing.JFrame {
         jLabel16.setText(":");
         jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 250, -1, -1));
 
-        lblten.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblten.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblten.setForeground(new java.awt.Color(255, 0, 102));
         lblten.setText("jLabel17");
         jPanel5.add(lblten, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 54, -1, -1));
 
-        lblgioitinh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblgioitinh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblgioitinh.setForeground(new java.awt.Color(255, 51, 51));
         lblgioitinh.setText("jLabel18");
         jPanel5.add(lblgioitinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 98, -1, -1));
 
-        lblemail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblemail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblemail.setForeground(new java.awt.Color(255, 51, 51));
         lblemail.setText("jLabel19");
         jPanel5.add(lblemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 148, -1, -1));
 
-        lblsdt.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblsdt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblsdt.setForeground(new java.awt.Color(255, 51, 51));
         lblsdt.setText("jLabel20");
         jPanel5.add(lblsdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 194, -1, -1));
 
-        lblcmnd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblcmnd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblcmnd.setForeground(new java.awt.Color(255, 51, 51));
         lblcmnd.setText("jLabel21");
         jPanel5.add(lblcmnd, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
@@ -510,13 +527,14 @@ public class Dat_ve extends javax.swing.JFrame {
         });
         jPanel5.add(tblSanVoucher, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 130, -1));
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Exit.png"))); // NOI18N
         jButton4.setText("Đăng xuất");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1022, 628, -1, -1));
+        jPanel5.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 620, -1, -1));
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/poly/Views/hinh-anh-chill-dep.jpg"))); // NOI18N
         jPanel5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 1060));
@@ -578,6 +596,7 @@ public class Dat_ve extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Sửa thông tin", jPanel1);
 
+        jPanel6.setBackground(new java.awt.Color(153, 255, 153));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -626,7 +645,7 @@ public class Dat_ve extends javax.swing.JFrame {
         jLabel43.setText("Đào Văn Thanh");
         jPanel6.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 240, -1, -1));
 
-        btnXacNhanThanhToan.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        btnXacNhanThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnXacNhanThanhToan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Euro.png"))); // NOI18N
         btnXacNhanThanhToan.setText("Xác nhận đã thanh toán");
         btnXacNhanThanhToan.addActionListener(new java.awt.event.ActionListener() {
@@ -753,19 +772,23 @@ public class Dat_ve extends javax.swing.JFrame {
     private void btnXacNhanThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanThanhToanActionPerformed
         // TODO add your handling code here:
         int row = tblDatVe.getSelectedRow();
-        int con = JOptionPane.showConfirmDialog(this, "Bạn xác nhận đã thanh toán hóa đơn rồi chứ?");
-        if (con == JOptionPane.NO_OPTION || con == JOptionPane.CANCEL_OPTION || con == JOptionPane.CLOSED_OPTION) {
-            return;
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Hãy quay lại mục chọn vé");
         } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chờ hệ thống check thanh toán! Cảm ơn quý khách đã sử dụng dịch vụ :3");
-            Tau t = new Tau();
-            t.setVitri((int) tblDatVe.getValueAt(row, 5));
-            t.setToa(tblDatVe.getValueAt(row, 4).toString());
-            t.setTentau(tblDatVe.getValueAt(row, 3).toString());
-            veser.updatexacnhan(t);
+            int con = JOptionPane.showConfirmDialog(this, "Bạn xác nhận đã thanh toán hóa đơn rồi chứ?");
+            if (con == JOptionPane.NO_OPTION || con == JOptionPane.CANCEL_OPTION || con == JOptionPane.CLOSED_OPTION) {
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "Vui lòng chờ hệ thống check thanh toán! Cảm ơn quý khách đã sử dụng dịch vụ :3");
+                Tau t = new Tau();
+                t.setVitri((int) tblDatVe.getValueAt(row, 5));
+                t.setToa(tblDatVe.getValueAt(row, 4).toString());
+                t.setTentau(tblDatVe.getValueAt(row, 3).toString());
+                veser.updatexacnhan(t);
+                loadDatVe();
+            }
+
         }
-
-
     }//GEN-LAST:event_btnXacNhanThanhToanActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -808,6 +831,12 @@ public class Dat_ve extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tbnTimKiemActionPerformed
 
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        // TODO add your handling code here:
+        loadDatVe();
+        loadVeCuaToi();
+    }//GEN-LAST:event_btnLamMoiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -844,6 +873,7 @@ public class Dat_ve extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnXacNhanThanhToan;
     private javax.swing.JButton btnchonve;
     private javax.swing.JButton btnsuatt;

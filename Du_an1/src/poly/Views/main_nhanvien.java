@@ -5,6 +5,7 @@
 package poly.Views;
 
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +15,16 @@ import poly.Model.Traintickets;
 import poly.Services.ITrainTicketService;
 import poly.Services.TrainticketsService;
 import poly.Services.impl.TrainTickServiceImpl;
+
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.Transport;
 
 /**
  *
@@ -26,7 +37,7 @@ public class main_nhanvien extends javax.swing.JFrame {
     private DefaultComboBoxModel defaultComboBoxModel;
     private ITrainTicketService trainTicketService = new TrainTickServiceImpl();
     private ArrayList<Tau> getListVeTau = trainTicketService.getCbTau();
-
+    private ArrayList<Traintickets> getListThanhToan= veser.checkthanhtoan();
     public main_nhanvien() {
         initComponents();
         loadthanhtoan();
@@ -53,13 +64,15 @@ public class main_nhanvien extends javax.swing.JFrame {
         ArrayList<Traintickets> v = veser.checkthanhtoan();
         dtm = (DefaultTableModel) tblxacnhan.getModel();
         dtm.setRowCount(0);
+        txtmave.setText("");
         for (Traintickets x : v) {
             dtm.addRow(new Object[]{
                 x.getId(),
                 x.getNguoidung().getTen(),
                 x.getGiokhoihanh(), x.getGioden(),
                 x.getTau().getTentau(), x.getTau().getToa(), x.getTau().getVitri(),
-                x.getGia()
+                x.getGia(),
+                x.getNguoidung().getEmail()
             });
         }
     }
@@ -83,16 +96,15 @@ public class main_nhanvien extends javax.swing.JFrame {
         ArrayList<Traintickets> ve = veser.getTTVe();
         dtm = (DefaultTableModel) tblQuanLyVe.getModel();
         dtm.setRowCount(0);
-        dtm.setColumnIdentifiers(new String[]{"Ngày đi","Price","Thuế","Giờ khởi hành","Giờ đến","Điểm đi","Điểm đến","Tên tàu"});
+        dtm.setColumnIdentifiers(new String[]{"Ngày đi", "Price", "Thuế", "Giờ khởi hành", "Giờ đến", "Điểm đi", "Điểm đến", "Tên tàu"});
         for (Traintickets n : ve) {
             dtm.addRow(new Object[]{
-               // n.getId(),
+                // n.getId(),
                 n.getNgaydi(),
                 n.getGia(), n.getThue(),
                 n.getGiokhoihanh(), n.getGioden(),
                 n.getDiemdi(), n.getDiemden(),
-                n.getTau().getTentau(),
-               // n.getTau().getToa(), n.getTau().getVitri(), 
+                n.getTau().getTentau(), // n.getTau().getToa(), n.getTau().getVitri(), 
             });
         }
     }
@@ -115,7 +127,6 @@ public class main_nhanvien extends javax.swing.JFrame {
         btnhuy = new javax.swing.JButton();
         txtmave = new javax.swing.JTextField();
         btnLamMoi = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -244,19 +255,6 @@ public class main_nhanvien extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Xác nhận thanh toán", jPanel3);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 444, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Doanh thu", jPanel5);
-
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -349,6 +347,8 @@ public class main_nhanvien extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Thông tin nhân viên", jPanel1);
+
+        jPanel4.setBackground(new java.awt.Color(102, 255, 102));
 
         tblQuanLyVe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -508,11 +508,97 @@ public class main_nhanvien extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblxacnhanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblxacnhanMouseClicked
+    private void btnThemVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemVeActionPerformed
+        Traintickets traintickets = new Traintickets();
+        traintickets.setNgaydi(jDateNgayDi.getDate());
+        traintickets.setGia(Double.parseDouble(txtPrice.getText()));
+        traintickets.setThue(Double.parseDouble(txtThue.getText()));
+        traintickets.setGiokhoihanh(txtGioKhoiHanh.getText());
+        traintickets.setGioden(txtGioDen.getText());
+        traintickets.setDiemdi(cbDiemDi.getSelectedItem().toString());
+        traintickets.setDiemden(cbDiemDen.getSelectedItem().toString());
+
+        int index = cbTenTau.getSelectedIndex();
+        Tau t = getListVeTau.get(index);
+        traintickets.setTau(t);
+
+        System.out.println(t.getId());
+    }//GEN-LAST:event_btnThemVeActionPerformed
+
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        // TODO add your handling code here:
+        loadthanhtoan();
+        loadDatVe();
+    }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void btnhuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhuyActionPerformed
         // TODO add your handling code here:
         int row = tblxacnhan.getSelectedRow();
-        txtmave.setText(tblxacnhan.getValueAt(row, 0).toString());
-    }//GEN-LAST:event_tblxacnhanMouseClicked
+
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Chưa có yêu cầu thanh toán");
+            return;
+        }
+        int con = JOptionPane.showConfirmDialog(this, "Xác nhận hủy vé chứ");
+        if (con == JOptionPane.NO_OPTION || con == JOptionPane.CANCEL_OPTION || con == JOptionPane.CLOSED_OPTION) {
+            return;
+        } else {
+            // JOptionPane.showMessageDialog(this, "Hệ thống đã thực hiện xác nhận!");
+            Tau t = new Tau();
+            t.setVitri((int) tblxacnhan.getValueAt(row, 6));
+            t.setToa(tblxacnhan.getValueAt(row, 5).toString());
+            t.setTentau(tblxacnhan.getValueAt(row, 4).toString());
+            veser.updatexacnhan3(t);
+            loadthanhtoan();
+
+            //lấy các giá trị
+            String liDo= JOptionPane.showInputDialog(this, "Lý lo ");
+            Traintickets vetau= getListThanhToan.get(row);
+            String email= vetau.getNguoidung().getEmail();
+            String maVe= vetau.getId();
+            String diemDi= vetau.getDiemdi();
+            String diemDen= vetau.getDiemden();
+            Date ngayDi= vetau.getNgaydi();
+            // gửi gmail
+
+            final String username = lblemail.getText();
+            final String password = "linh1905";
+
+            Properties prop = new Properties();
+            prop.put("mail.smtp.host", "smtp.gmail.com");
+            prop.put("mail.smtp.port", "587");
+            prop.put("mail.smtp.auth", "true");
+            prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+            Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+                try {
+                    Message message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(username));
+                    message.setRecipients(
+                        Message.RecipientType.TO,
+                        InternetAddress.parse(email)
+                    );
+                    message.setSubject("Thông báo hoàn vé");
+                    message.setText("Mã vé: "+maVe +"\n"
+                        +"Xuất phát từ "+diemDi +" đến "+diemDen +" ngay "+ngayDi+"\n"
+                        + " Đã bị hủy bởi nhân viên "+ lblma.getText()+"\n"
+                        +"Lý do: "+liDo);
+
+                    Transport.send(message);
+
+                    System.out.println("Done");
+
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }
+    }//GEN-LAST:event_btnhuyActionPerformed
 
     private void btnxacnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxacnhanActionPerformed
         // TODO add your handling code here:
@@ -537,48 +623,11 @@ public class main_nhanvien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnxacnhanActionPerformed
 
-    private void btnhuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhuyActionPerformed
+    private void tblxacnhanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblxacnhanMouseClicked
         // TODO add your handling code here:
         int row = tblxacnhan.getSelectedRow();
-        if (row < 0) {
-            JOptionPane.showMessageDialog(this, "Chưa có yêu cầu thanh toán");
-            return;
-        }
-        int con = JOptionPane.showConfirmDialog(this, "Bạn xác nhận hóa đơn này chưa thanh toán!");
-        if (con == JOptionPane.NO_OPTION || con == JOptionPane.CANCEL_OPTION || con == JOptionPane.CLOSED_OPTION) {
-            return;
-        } else {
-            JOptionPane.showMessageDialog(this, "Hệ thống đã thực hiện xác nhận!");
-            Tau t = new Tau();
-            t.setVitri((int) tblxacnhan.getValueAt(row, 6));
-            t.setToa(tblxacnhan.getValueAt(row, 5).toString());
-            t.setTentau(tblxacnhan.getValueAt(row, 4).toString());
-            veser.updatexacnhan3(t);
-        }
-    }//GEN-LAST:event_btnhuyActionPerformed
-
-    private void btnThemVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemVeActionPerformed
-        Traintickets traintickets = new Traintickets();
-        traintickets.setNgaydi(jDateNgayDi.getDate());
-        traintickets.setGia(Double.parseDouble(txtPrice.getText()));
-        traintickets.setThue(Double.parseDouble(txtThue.getText()));
-        traintickets.setGiokhoihanh(txtGioKhoiHanh.getText());
-        traintickets.setGioden(txtGioDen.getText());
-        traintickets.setDiemdi(cbDiemDi.getSelectedItem().toString());
-        traintickets.setDiemden(cbDiemDen.getSelectedItem().toString());
-        
-        int index = cbTenTau.getSelectedIndex();
-        Tau t = getListVeTau.get(index);
-        traintickets.setTau(t);
-
-        System.out.println(t.getId());
-    }//GEN-LAST:event_btnThemVeActionPerformed
-
-    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        // TODO add your handling code here:
-        loadthanhtoan();
-        loadDatVe();
-    }//GEN-LAST:event_btnLamMoiActionPerformed
+        txtmave.setText(tblxacnhan.getValueAt(row, 0).toString());
+    }//GEN-LAST:event_tblxacnhanMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -645,7 +694,6 @@ public class main_nhanvien extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
