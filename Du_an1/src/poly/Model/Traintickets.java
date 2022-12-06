@@ -20,10 +20,22 @@ public class Traintickets {
     private String iduser;
     private NguoiDung nguoidung;
 
-    public Traintickets(String id, String giokhoihanh, String gioden, Double gia, Tau tau, NguoiDung nguoidung) {
+//    public Traintickets(String id, String giokhoihanh, String gioden, Double gia, Tau tau, NguoiDung nguoidung) {
+//        this.id = id;
+//        this.giokhoihanh = giokhoihanh;
+//        this.gioden = gioden;
+//        this.gia = gia;
+//        this.tau = tau;
+//        this.nguoidung = nguoidung;
+//    }
+
+    public Traintickets(String id, Date ngaydi, String giokhoihanh, String gioden, String diemdi, String diemden, Double gia, Tau tau, NguoiDung nguoidung) {
         this.id = id;
+        this.ngaydi = ngaydi;
         this.giokhoihanh = giokhoihanh;
         this.gioden = gioden;
+        this.diemdi = diemdi;
+        this.diemden = diemden;
         this.gia = gia;
         this.tau = tau;
         this.nguoidung = nguoidung;

@@ -141,7 +141,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("PHẦN MỀN BÁN VÉ TÀU");
+        jLabel6.setText("PHẦN MỀM BÁN VÉ TÀU");
         jPanel3.add(jLabel6);
         jLabel6.setBounds(0, 34, 720, 29);
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import poly.Model.Tau;
 import poly.Model.Traintickets;
+import poly.ViewModels.TrainTicketViewModel;
 
 /**
  *
@@ -20,5 +21,9 @@ public interface ITrainTicketService {
     //
     public ArrayList<Tau> getCbTau();
     
-    public ArrayList<String> getCbTenTau();
+    public String themVe(TrainTicketViewModel trainTicketViewModel);
+    
+    public String suaVe(String id,TrainTicketViewModel trainTicketViewModel);
+    
+    public String xoaVe(String id);
 }

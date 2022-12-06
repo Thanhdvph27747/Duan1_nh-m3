@@ -106,4 +106,9 @@ public class NguoiDungResponsitory {
         );
         return row;
     }
+    public Integer addReignter(NguoiDung n){
+        String sql = "insert into NguoiDung(id,Pass,ten,Ho,GioiTinh,SoCMND,Email,Sdt) values(?,?,?,?,?,?,?,?)";
+        Integer row = JDBCHelper.executeUpdate(sql,n.getId(),n.getPass(),n.getTen(),n.getHo(),n.getGioitinh(),n.getCmnd(),n.getEmail(),n.getSdt());
+        return  row;
+    }
 }

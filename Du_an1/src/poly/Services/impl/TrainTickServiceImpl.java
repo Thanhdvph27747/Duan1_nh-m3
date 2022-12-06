@@ -10,6 +10,7 @@ import poly.Model.Tau;
 import poly.Model.Traintickets;
 import poly.Responsitory.TrainticketResponsitory;
 import poly.Services.ITrainTicketService;
+import poly.ViewModels.TrainTicketViewModel;
 
 /**
  *
@@ -30,8 +31,33 @@ public class TrainTickServiceImpl implements ITrainTicketService{
     }
 
     @Override
-    public ArrayList<String> getCbTenTau() {
-        return trainticketResponsitory.listCB();
+    public String themVe(TrainTicketViewModel trainTicketViewModel) {
+        boolean check= trainticketResponsitory.themVe(trainTicketViewModel);
+        if(check){
+            return "Thêm thành công";
+        }else{
+            return "Thêm thất bại";
+        }
+    }
+
+    @Override
+    public String suaVe(String id, TrainTicketViewModel trainTicketViewModel) {
+        boolean check= trainticketResponsitory.suaVe(id, trainTicketViewModel);
+        if(check){
+            return "Cập nhật thành công";
+        }else{
+            return "Cập nhật thất bại";
+        }
+    }
+
+    @Override
+    public String xoaVe(String id) {
+        boolean check= trainticketResponsitory.xoaVe(id);
+        if(check){
+            return "Xóa thành công";
+        }else{
+            return "Xóa thất bại";
+        } 
     }
     
     

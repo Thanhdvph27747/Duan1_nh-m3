@@ -14,6 +14,7 @@ import poly.Model.NguoiDung;
 import poly.Model.Traintickets;
 import poly.Utility.DBConnection;
 import poly.Utility.JDBCHelper;
+import poly.ViewModels.TrainTicketViewModel;
 
 /**
  *
@@ -136,7 +137,7 @@ public class TrainticketResponsitory {
     //goi ra main nhanvien
     public ArrayList<Traintickets> checkthanhtoan() {
         ArrayList<Traintickets> ve = new ArrayList<>();
-        String sql = " select TrainTickets.Id, NguoiDung.ten,NguoiDung.Email,GioKhoiHanh,GioDen,tau.TenTau,tau.Toa,tau.vitri,Price\n"
+        String sql = " select TrainTickets.Id, NguoiDung.ten,NguoiDung.Email,GioKhoiHanh,GioDen,tau.TenTau,tau.Toa,tau.vitri,Price,TrainTickets.ngaydi,TrainTickets.DiemDi,DiemDen\n"
                 + " from TrainTickets join Tau on TrainTickets.IdHangTau = tau.id \n"
                 + " join nguoidung on traintickets.iduser = nguoidung.id where tau.xacnhan=2";
         try {
@@ -153,10 +154,12 @@ public class TrainticketResponsitory {
                 String id = rs.getString(1);                
                 String giokhoihanh = rs.getString(4);
                 String gioden = rs.getString(5);
-                
+                String diemDi = rs.getString(11);
+                String Diemden = rs.getString(12);
+                Date ngayDI= rs.getDate(10);
                 Double price = rs.getDouble(9);
                 
-                ve.add(new Traintickets(id, giokhoihanh, gioden, price, taus, ng));
+                ve.add(new Traintickets(id, ngayDI, giokhoihanh, gioden, diemDi, Diemden, price, taus, ng));
                 
             }
         } catch (Exception ex) {
@@ -203,19 +206,57 @@ public class TrainticketResponsitory {
         }
         return getAll;
     }
-    public ArrayList<String> listCB() {
-        ArrayList<String> listQue = new ArrayList<>();
-        String sql = "select TenTau from Tau where id not in (select IdHangTau from TrainTickets)";
-        try ( Connection con = connection.getConnection();  PreparedStatement ps = con.prepareStatement(sql)) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                String st = rs.getString(1);
-                listQue.add(st);
-            }
+    
+    public boolean themVe(TrainTicketViewModel ve){
+        String sql="insert into Traintickets(NgayDi,Price,Thue,GioKhoiHanh,GioDen,DiemDi,DiemDen,IdHangTau) values(?,?,?,?,?,?,?,?)";
+        int check=0;
+        try (Connection con= connection.getConnection();
+                PreparedStatement ps= con.prepareStatement(sql)) {
+            ps.setObject(1, ve.getNgayDi());
+            ps.setObject(2, ve.getPrice());
+            ps.setObject(3, ve.getThue());
+            ps.setObject(4, ve.getGioKhoiHanh());
+            ps.setObject(5, ve.getGioDen());
+            ps.setObject(6, ve.getDiemDi());
+            ps.setObject(7, ve.getDiemDen());
+            ps.setObject(8, ve.getTenTau());
+            check=ps.executeUpdate();
+            
         } catch (Exception e) {
             System.out.println(e);
         }
-        return listQue;
+        return check>0;
+    }
+    public boolean suaVe(String id,TrainTicketViewModel ve){
+        String sql="update Traintickets set NgayDi=? ,Price=? ,Thue=? ,GioKhoiHanh=? ,GioDen=? ,DiemDi=? ,DiemDen=?  where id= '"+id+"' ";
+        int check=0;
+        try (Connection con= connection.getConnection();
+                PreparedStatement ps= con.prepareStatement(sql)) {
+            ps.setObject(1, ve.getNgayDi());
+            ps.setObject(2, ve.getPrice());
+            ps.setObject(3, ve.getThue());
+            ps.setObject(4, ve.getGioKhoiHanh());
+            ps.setObject(5, ve.getGioDen());
+            ps.setObject(6, ve.getDiemDi());
+            ps.setObject(7, ve.getDiemDen());
+            check=ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return check>0;
+    }
+    public boolean xoaVe(String id){
+        String sql="delete from Traintickets  where id= '"+id+"' ";
+        int check=0;
+        try (Connection con= connection.getConnection();
+                PreparedStatement ps= con.prepareStatement(sql)) {
+            check=ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return check>0;
     }
     
 }

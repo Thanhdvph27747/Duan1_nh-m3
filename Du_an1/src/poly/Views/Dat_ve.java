@@ -285,6 +285,8 @@ public class Dat_ve extends javax.swing.JFrame {
             }
         });
         jPanel2.add(tbnTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 110, -1));
+
+        jDateNgayDi.setDateFormatString("dd-MM-yyyy");
         jPanel2.add(jDateNgayDi, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 190, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(153, 255, 153));

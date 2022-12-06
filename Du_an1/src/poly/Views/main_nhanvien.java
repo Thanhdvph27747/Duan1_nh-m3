@@ -25,6 +25,7 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.Transport;
+import poly.ViewModels.TrainTicketViewModel;
 
 /**
  *
@@ -37,7 +38,9 @@ public class main_nhanvien extends javax.swing.JFrame {
     private DefaultComboBoxModel defaultComboBoxModel;
     private ITrainTicketService trainTicketService = new TrainTickServiceImpl();
     private ArrayList<Tau> getListVeTau = trainTicketService.getCbTau();
-    private ArrayList<Traintickets> getListThanhToan= veser.checkthanhtoan();
+    private ArrayList<Traintickets> getListThanhToan = veser.checkthanhtoan();
+    private ArrayList<Traintickets> getDanhSachVe = veser.getTTVe();
+
     public main_nhanvien() {
         initComponents();
         loadthanhtoan();
@@ -77,13 +80,6 @@ public class main_nhanvien extends javax.swing.JFrame {
         }
     }
 
-//    public void loadCbTau(ArrayList<String> getList){
-//        cbTenTau.removeAllItems();
-//        defaultComboBoxModel= (DefaultComboBoxModel) cbTenTau.getModel();
-//        for (String string : getList) {
-//            defaultComboBoxModel.addElement(string);
-//        }
-//    }
     public void loadCbTau(ArrayList<Tau> getList) {
         cbTenTau.removeAllItems();
         defaultComboBoxModel = (DefaultComboBoxModel) cbTenTau.getModel();
@@ -107,6 +103,52 @@ public class main_nhanvien extends javax.swing.JFrame {
                 n.getTau().getTentau(), // n.getTau().getToa(), n.getTau().getVitri(), 
             });
         }
+    }
+
+    public boolean checkValidate() {
+        if (jDateNgayDi.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Ngày đi không được bỏ trống");
+            return false;
+        }
+        if (jDateNgayDi.getDate().before(new Date())) {
+            JOptionPane.showMessageDialog(this, "Chọn ngày không hợp lệ");
+            return false;
+        }
+        if (txtPrice.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Giá không được bỏ trống");
+            return false;
+        }
+
+        try {
+            double gia = Double.parseDouble(txtPrice.getText());
+            if (gia <= 0) {
+                JOptionPane.showMessageDialog(this, "Giá phải lớn hơn 0");
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Giá phải nhập số");
+            return false;
+        }
+        if (txtThue.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Thuế không được bỏ trống");
+            return false;
+        }
+
+        try {
+            double thue = Double.parseDouble(txtThue.getText());
+            if (thue <= 0) {
+                JOptionPane.showMessageDialog(this, "Thuế phải lớn hơn 0");
+                return false;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Thuế phải nhập số");
+            return false;
+        }
+        if (cbDiemDen.getSelectedItem().toString().equalsIgnoreCase(cbDiemDi.getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(this, "Điểm đi và điểm đến không được trùng");
+            return false;
+        }
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -160,8 +202,8 @@ public class main_nhanvien extends javax.swing.JFrame {
         txtGioKhoiHanh = new javax.swing.JTextField();
         txtGioDen = new javax.swing.JTextField();
         btnThemVe = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSuaVeTau = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -361,6 +403,11 @@ public class main_nhanvien extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblQuanLyVe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblQuanLyVeMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblQuanLyVe);
 
         jLabel5.setText("Ngày đi");
@@ -379,9 +426,9 @@ public class main_nhanvien extends javax.swing.JFrame {
 
         jLabel14.setText("Thuế");
 
-        cbDiemDi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbDiemDi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Hải Dương", "Hải Phòng", "Quảng Ninh", "Móng Cái" }));
 
-        cbDiemDen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbDiemDen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hà Nội", "Hải Dương", "Hải Phòng", "Quảng Ninh", "Móng Cái" }));
 
         cbTenTau.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -394,9 +441,19 @@ public class main_nhanvien extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Sửa");
+        btnSuaVeTau.setText("Sửa");
+        btnSuaVeTau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaVeTauActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Xóa");
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -446,9 +503,9 @@ public class main_nhanvien extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(btnThemVe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(86, 86, 86)
-                                        .addComponent(jButton2)
+                                        .addComponent(btnSuaVeTau)
                                         .addGap(77, 77, 77)))))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
@@ -479,12 +536,12 @@ public class main_nhanvien extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(txtGioKhoiHanh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThemVe)
-                    .addComponent(jButton2))
+                    .addComponent(btnSuaVeTau))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtGioDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                    .addComponent(btnXoa))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -509,20 +566,24 @@ public class main_nhanvien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemVeActionPerformed
-        Traintickets traintickets = new Traintickets();
-        traintickets.setNgaydi(jDateNgayDi.getDate());
-        traintickets.setGia(Double.parseDouble(txtPrice.getText()));
-        traintickets.setThue(Double.parseDouble(txtThue.getText()));
-        traintickets.setGiokhoihanh(txtGioKhoiHanh.getText());
-        traintickets.setGioden(txtGioDen.getText());
-        traintickets.setDiemdi(cbDiemDi.getSelectedItem().toString());
-        traintickets.setDiemden(cbDiemDen.getSelectedItem().toString());
+        if (checkValidate()) {
+            TrainTicketViewModel traintickets = new TrainTicketViewModel();
+            traintickets.setNgayDi(jDateNgayDi.getDate());
+            traintickets.setPrice(Double.parseDouble(txtPrice.getText()));
+            traintickets.setThue(Double.parseDouble(txtThue.getText()));
+            traintickets.setGioKhoiHanh(txtGioKhoiHanh.getText());
+            traintickets.setGioDen(txtGioDen.getText());
+            traintickets.setDiemDi(cbDiemDi.getSelectedItem().toString());
+            traintickets.setDiemDen(cbDiemDen.getSelectedItem().toString());
 
-        int index = cbTenTau.getSelectedIndex();
-        Tau t = getListVeTau.get(index);
-        traintickets.setTau(t);
+            int index = cbTenTau.getSelectedIndex();
+            Tau t = getListVeTau.get(index);
+            traintickets.setTenTau(t.getId());
 
-        System.out.println(t.getId());
+            JOptionPane.showMessageDialog(this, trainTicketService.themVe(traintickets));
+            loadDatVe();
+            loadCbTau(trainTicketService.getCbTau());
+        }
     }//GEN-LAST:event_btnThemVeActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
@@ -552,13 +613,13 @@ public class main_nhanvien extends javax.swing.JFrame {
             loadthanhtoan();
 
             //lấy các giá trị
-            String liDo= JOptionPane.showInputDialog(this, "Lý lo ");
-            Traintickets vetau= getListThanhToan.get(row);
-            String email= vetau.getNguoidung().getEmail();
-            String maVe= vetau.getId();
-            String diemDi= vetau.getDiemdi();
-            String diemDen= vetau.getDiemden();
-            Date ngayDi= vetau.getNgaydi();
+            String liDo = JOptionPane.showInputDialog(this, "Lý lo ");
+            Traintickets vetau = getListThanhToan.get(row);
+            String email = vetau.getNguoidung().getEmail();
+            String maVe = vetau.getId();
+            String diemDi = vetau.getDiemdi();
+            String diemDen = vetau.getDiemden();
+            Date ngayDi = vetau.getNgaydi();
             // gửi gmail
 
             final String username = lblemail.getText();
@@ -571,33 +632,34 @@ public class main_nhanvien extends javax.swing.JFrame {
             prop.put("mail.smtp.starttls.enable", "true"); //TLS
 
             Session session = Session.getInstance(prop,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                });
+                    new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
 
-                try {
-                    Message message = new MimeMessage(session);
-                    message.setFrom(new InternetAddress(username));
-                    message.setRecipients(
+            try {
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(username));
+                message.setRecipients(
                         Message.RecipientType.TO,
                         InternetAddress.parse(email)
-                    );
-                    message.setSubject("Thông báo hoàn vé");
-                    message.setText("Mã vé: "+maVe +"\n"
-                        +"Xuất phát từ "+diemDi +" đến "+diemDen +" ngay "+ngayDi+"\n"
-                        + " Đã bị hủy bởi nhân viên "+ lblma.getText()+"\n"
-                        +"Lý do: "+liDo);
+                );
+                message.setSubject("Thông báo hoàn vé");
+                message.setText("Mã vé : " + maVe + "\n"
+                        + "Xuất phát từ :" + diemDi + " đến " + diemDen + "\n"
+                        + "Ngày đi: " + ngayDi + "\n"
+                        + "Đã bị hủy bởi nhân viên " + lblma.getText() + "\n"
+                        + "Lý do : " + liDo);
 
-                    Transport.send(message);
+                Transport.send(message);
 
-                    System.out.println("Done");
+                System.out.println("Done");
 
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
+            } catch (MessagingException e) {
+                e.printStackTrace();
             }
+        }
     }//GEN-LAST:event_btnhuyActionPerformed
 
     private void btnxacnhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxacnhanActionPerformed
@@ -628,6 +690,45 @@ public class main_nhanvien extends javax.swing.JFrame {
         int row = tblxacnhan.getSelectedRow();
         txtmave.setText(tblxacnhan.getValueAt(row, 0).toString());
     }//GEN-LAST:event_tblxacnhanMouseClicked
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        int row= tblQuanLyVe.getSelectedRow();
+        String idVe = getDanhSachVe.get(row).getId();
+        JOptionPane.showMessageDialog(this, trainTicketService.xoaVe(idVe));
+        loadCbTau(trainTicketService.getCbTau());
+        loadDatVe();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void tblQuanLyVeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanLyVeMouseClicked
+        int row = tblQuanLyVe.getSelectedRow();
+        // jDateNgayDi.setDate(tblQuanLyVe.getValueAt(row, 0).toString());
+        txtPrice.setText(tblQuanLyVe.getValueAt(row, 1).toString());
+        txtThue.setText(tblQuanLyVe.getValueAt(row, 2).toString());
+        txtGioDen.setText(tblQuanLyVe.getValueAt(row, 4).toString());
+        txtGioKhoiHanh.setText(tblQuanLyVe.getValueAt(row, 3).toString());
+        cbDiemDen.getModel().setSelectedItem(tblQuanLyVe.getValueAt(row, 6).toString());
+        cbDiemDi.getModel().setSelectedItem(tblQuanLyVe.getValueAt(row, 5).toString());
+    }//GEN-LAST:event_tblQuanLyVeMouseClicked
+
+    private void btnSuaVeTauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaVeTauActionPerformed
+        // TODO add your handling code here:
+        int row = tblQuanLyVe.getSelectedRow();
+        if(checkValidate()){
+        String idVe = getDanhSachVe.get(row).getId();
+        TrainTicketViewModel traintickets = new TrainTicketViewModel();
+        traintickets.setNgayDi(jDateNgayDi.getDate());
+        traintickets.setPrice(Double.parseDouble(txtPrice.getText()));
+        traintickets.setThue(Double.parseDouble(txtThue.getText()));
+        traintickets.setGioKhoiHanh(txtGioKhoiHanh.getText());
+        traintickets.setGioDen(txtGioDen.getText());
+        traintickets.setDiemDi(cbDiemDi.getSelectedItem().toString());
+        traintickets.setDiemDen(cbDiemDen.getSelectedItem().toString());
+        JOptionPane.showMessageDialog(this, trainTicketService.suaVe(idVe, traintickets));
+        loadDatVe();
+        loadCbTau(trainTicketService.getCbTau());
+        }
+    }//GEN-LAST:event_btnSuaVeTauActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -663,14 +764,14 @@ public class main_nhanvien extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLamMoi;
+    private javax.swing.JButton btnSuaVeTau;
     private javax.swing.JButton btnThemVe;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnhuy;
     private javax.swing.JButton btnxacnhan;
     private javax.swing.JComboBox<String> cbDiemDen;
     private javax.swing.JComboBox<String> cbDiemDi;
     private javax.swing.JComboBox<String> cbTenTau;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private com.toedter.calendar.JDateChooser jDateNgayDi;
     private javax.swing.JLabel jLabel1;

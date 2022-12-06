@@ -33,4 +33,7 @@ public class NguoiDungServices {
     public NguoiDung getID(String socmnd){
         return ndres.getID(socmnd);
     }
+    public Integer addReignter(NguoiDung n){
+      return ndres.addReignter(n);
+    }
 }
